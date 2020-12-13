@@ -14,7 +14,8 @@ def _load_input_data(filename) -> Tuple[int, List[_BusInfo]]:
     for index, bus_id in enumerate(buses_ids.split(',')):
         if bus_id == 'x':
             continue
-        bus_info = _BusInfo(bus_id=int(bus_id), offset=int(bus_id) - index)
+        time = int(bus_id)
+        bus_info = _BusInfo(bus_id=time, offset=time - (index % time))
         buses_infos.append(bus_info)
     return int(depart_time), buses_infos
 
@@ -34,7 +35,7 @@ def _get_waiting_info(depart_time: int, buses_infos: List[_BusInfo]) -> _Waintin
 
 
 # used https://en.wikipedia.org/wiki/Chinese_remainder_theorem
-def _find_subsequent_time(buses_infos: List[_BusInfo]) -> int:
+def _find_subsequent_by_chinese_remainders(buses_infos: List[_BusInfo]) -> int:
     all_buses_time = 1
     for bus_info in buses_infos:
         all_buses_time *= bus_info.bus_id
@@ -59,6 +60,20 @@ def _multiplicative_inverse(product, number):
     return val_new
 
 
+def _find_subsequent_by_iterations(buses_infos: List[_BusInfo]) -> int:
+    timestamp = 0
+    step = buses_infos[0].bus_id
+
+    for index in range(1, len(buses_infos)):
+        bus_info = buses_infos[index]
+        while (timestamp % bus_info.bus_id) != bus_info.offset:
+            timestamp += step
+        step *= bus_info.bus_id
+        index += 1
+
+    return timestamp
+
+
 def _main():
     for filename in ('test.txt', 'input.txt'):
         print('\n', filename)
@@ -68,8 +83,11 @@ def _main():
         print('bus id', waiting.bus_id, 'wait time', waiting.time,
               'answer is', waiting.bus_id * waiting.time)
 
-        time = _find_subsequent_time(buses_infos)
-        print('subsequent time is', time)
+        time = _find_subsequent_by_chinese_remainders(buses_infos)
+        print('subsequent by chinese remainders, answer is', time)
+
+        time = _find_subsequent_by_iterations(buses_infos)
+        print('subsequent by iterations, answer is', time)
 
 
 if __name__ == '__main__':
