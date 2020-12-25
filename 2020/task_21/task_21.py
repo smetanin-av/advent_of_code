@@ -38,8 +38,16 @@ class _ListOfFoods:
                 self.allergens_info[allergen] = set(food.ingredients)
         self.update_allergens_info()
 
+    def get_possible_allergens(self) -> Iterable[str]:
+        for ingredients in self.allergens_info.values():
+            if isinstance(ingredients, str):
+                yield ingredients
+            elif isinstance(ingredients, set):
+                for ingredient in ingredients:
+                    yield ingredient
+
     def is_possible_allergen(self, ingredient) -> bool:
-        return any(ingredient in ingredients for ingredients in self.allergens_info.values())
+        return ingredient in self.get_possible_allergens()
 
     def get_foods_with_safe_ingredients(self) -> Iterable[Tuple[str, List[_FoodInfo]]]:
         for ingredient, foods in self._by_ingredients.items():
@@ -56,12 +64,18 @@ class _ListOfFoods:
             if isinstance(ingredients, set):
                 yield allergen, ingredients
 
-    def update_allergens_info(self):
+    def get_allergens_to_update(self) -> Iterable[Tuple[str, Set]]:
         for _, ingredient in self.get_matched_allergens():
             for allergen, ingredients in self.get_unmatched_allergens():
-                ingredients.discard(ingredient)
-                if len(ingredients) == 1:
-                    self.allergens_info[allergen] = ingredients.pop()
+                if ingredient in ingredients:
+                    yield allergen, ingredients - {ingredient}
+
+    def update_allergens_info(self) -> None:
+        for allergen, ingredients in self.get_allergens_to_update():
+            if len(ingredients) == 1:
+                self.allergens_info[allergen] = ingredients.pop()
+            else:
+                self.allergens_info[allergen] = ingredients
 
 
 def _load_input_data(filename) -> _ListOfFoods:
@@ -86,7 +100,7 @@ def _main():
             count += len(foods)
         print('usage of safe ingredients is', count)
 
-        while any(list_of_foods.get_unmatched_allergens()):
+        while any(list_of_foods.get_allergens_to_update()):
             list_of_foods.update_allergens_info()
 
         dangerous = []
