@@ -177,7 +177,7 @@ def _load_input_data(filename) -> List[List[bool]]:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
 
         initials = _load_input_data(filename)

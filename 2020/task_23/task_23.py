@@ -2,7 +2,7 @@ from typing import Dict, List, cast
 
 _CUPS_LABELS = {
     'test': '389125467',
-    'input': '624397158'
+    'puzzle': '624397158'
 }
 
 

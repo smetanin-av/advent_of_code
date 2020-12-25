@@ -50,7 +50,7 @@ def _load_input_data(filename) -> _RulesInfo:
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'input.txt'):
+    for filename in ('test_0.txt', 'test_1.txt', 'puzzle.txt'):
         print('\n', filename)
         rules_info = _load_input_data(filename)
 

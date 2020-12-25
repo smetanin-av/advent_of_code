@@ -49,7 +49,7 @@ def _found_sequence_with_sum(numbers: List[int], summa: int):
 
 
 def _main():
-    for filename, length in (('test.txt', 5), ('input.txt', 25)):
+    for filename, length in (('test.txt', 5), ('puzzle.txt', 25)):
         print('\n', filename)
         numbers = _load_input_data(filename)
 

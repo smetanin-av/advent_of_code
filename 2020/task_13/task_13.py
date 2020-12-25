@@ -75,7 +75,7 @@ def _find_subsequent_by_iterations(buses_infos: List[_BusInfo]) -> int:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         depart_time, buses_infos = _load_input_data(filename)
 

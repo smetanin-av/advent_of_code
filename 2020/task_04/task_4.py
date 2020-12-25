@@ -78,7 +78,7 @@ def _load_input_data(filename) -> List[_PassportInfo]:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         passports = _load_input_data(filename)
         valid = list(filter(_PassportInfo.is_valid, passports))

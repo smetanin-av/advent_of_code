@@ -25,7 +25,7 @@ def _load_input_data(filename) -> List[_GroupInfo]:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         groups_infos = _load_input_data(filename)
         print('count of any yes', sum(x.count_of_any_yes() for x in groups_infos))

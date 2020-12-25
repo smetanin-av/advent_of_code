@@ -132,7 +132,7 @@ def _load_input_data(filename) -> Tuple[_RulesList, _TicketInfo, _TicketsList]:
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'input.txt'):
+    for filename in ('test_0.txt', 'test_1.txt', 'puzzle.txt'):
         print('\n', filename)
         rules, my_ticket, nearby_tickets = _load_input_data(filename)
 

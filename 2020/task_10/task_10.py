@@ -45,7 +45,7 @@ def _count_of_variants(numbers: List[int]) -> int:
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'input.txt'):
+    for filename in ('test_0.txt', 'test_1.txt', 'puzzle.txt'):
         print('\n', filename)
         jolts = _load_input_data(filename)
 

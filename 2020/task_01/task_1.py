@@ -4,7 +4,7 @@ from functools import reduce
 
 
 def _load_input_data() -> List[int]:
-    with open('input.txt') as fp:
+    with open('puzzle.txt') as fp:
         return [int(x) for x in fp.readlines()]
 
 

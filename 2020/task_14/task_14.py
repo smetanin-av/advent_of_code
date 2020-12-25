@@ -75,7 +75,7 @@ def _load_input_data(filename) -> List[_CommandInfo]:
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'input.txt'):
+    for filename in ('test_0.txt', 'test_1.txt', 'puzzle.txt'):
         print('\n', filename)
         commands = _load_input_data(filename)
 

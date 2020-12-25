@@ -103,7 +103,7 @@ def _load_input_data(filename) -> Tuple[_RulesList, List[str]]:
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'test_2.txt', 'input_0.txt', 'input_1.txt'):
+    for filename in ('test_0.txt', 'test_1.txt', 'test_2.txt', 'puzzle_0.txt', 'puzzle_1.txt'):
         print('\n', filename)
         rules_list, messages = _load_input_data(filename)
 

@@ -28,7 +28,7 @@ def _load_input_data(filename) -> Dict[int, _SeatInfo]:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         seats_by_ids = _load_input_data(filename)
 

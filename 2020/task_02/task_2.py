@@ -11,7 +11,7 @@ class _PasswordInfo(NamedTuple):
 
 def _load_input_data() -> List[_PasswordInfo]:
     re_line_tpl = re.compile(r'(?P<low>\d+)-(?P<high>\d+) (?P<char>[a-z]): (?P<text>\w+)\n?')
-    with open('input.txt') as fp:
+    with open('puzzle.txt') as fp:
         lines = fp.readlines()
     results = []
     for line in lines:

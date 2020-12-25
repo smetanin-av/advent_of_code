@@ -73,7 +73,7 @@ def _load_input_data(filename) -> _LayoutInfo:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         layout = _load_input_data(filename)
 

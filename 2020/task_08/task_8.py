@@ -64,7 +64,7 @@ def _load_input_data(filename) -> _ContextInfo:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         context = _load_input_data(filename)
         context.fix_and_execute()

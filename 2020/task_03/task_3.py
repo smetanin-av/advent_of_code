@@ -39,7 +39,7 @@ def _count_of_trees(map_info: _MapInfo, down: int, right: int):
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         map_info = _load_input_data(filename)
         answer = 1
 

@@ -163,7 +163,7 @@ def _load_input_data(filename) -> List[_ShipAction]:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
         actions = _load_input_data(filename)
 

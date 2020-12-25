@@ -124,7 +124,7 @@ def _load_input_data(filename: str) -> List[_StepsList]:
 
 
 def _main():
-    for filename in ('test.txt', 'input.txt'):
+    for filename in ('test.txt', 'puzzle.txt'):
         print('\n', filename)
 
         steps_series = _load_input_data(filename)

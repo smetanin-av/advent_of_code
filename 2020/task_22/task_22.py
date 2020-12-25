@@ -137,7 +137,7 @@ def _load_input_data(filename) -> Tuple[_DeckInfo, _DeckInfo]:
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'input.txt'):
+    for filename in ('test_0.txt', 'test_1.txt', 'puzzle.txt'):
         print('\n', filename)
 
         deck_1_orig, deck_2_orig = _load_input_data(filename)
