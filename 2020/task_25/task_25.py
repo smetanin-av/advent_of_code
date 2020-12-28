@@ -6,33 +6,49 @@ class _PublicKeys(NamedTuple):
     door: int
 
 
+_SUBJECT_NUMBER = 7
+_VALUES_HIGH_BOUND = 20201227
+
 _PUBLIC_KEYS_to_CHECK = {
     'test': _PublicKeys(card=5764801, door=17807724),
     'puzzle': _PublicKeys(card=11349501, door=5107328)
 }
 
 
-def _load_input_data(filename):
-    with open(filename) as fp:
-        text = fp.read()
+def _do_transform_step(value: int, subject: int) -> int:
+    return (value * subject) % _VALUES_HIGH_BOUND
+
+
+def _do_transform_loop(subject: int, loop_size: int) -> int:
+    value = 1
+    for _ in range(loop_size):
+        value = _do_transform_step(value, subject)
+    return value
 
 
 def _main():
-    for filename in ('test_0.txt', 'test_1.txt', 'puzzle.txt'):
-        print('\n', filename)
+    for name, publick_key in _PUBLIC_KEYS_to_CHECK.items():
+        print('\n', name)
 
-        _ = _load_input_data(filename)
-        for type_of_comparer in (_SimpleComparer, _SubGameComparer):
-            print('compare is', type_of_comparer.__name__)
-            deck_1 = deck_1_orig.get_copy(count_of_cards=len(deck_1_orig))
-            deck_2 = deck_2_orig.get_copy(count_of_cards=len(deck_2_orig))
+        card_loop_size = None
+        door_loop_size = None
 
-            game = _CardsGame(deck_1, deck_2, type_of_comparer)
-            winner = game.play_to_end()
+        value = 1
+        index = 0
 
-            print('winner is', winner.player_id, 'score', winner.get_score())
-            print('deck #1', deck_1.get_all())
-            print('deck #2', deck_2.get_all())
+        while not card_loop_size or not door_loop_size:
+            value = _do_transform_step(value, _SUBJECT_NUMBER)
+            index += 1
+            if value == publick_key.card:
+                card_loop_size = index
+            if value == publick_key.door:
+                door_loop_size = index
+
+        print('card loop size', card_loop_size)
+        print('encryption key', _do_transform_loop(publick_key.door, card_loop_size))
+
+        print('door loop size', door_loop_size)
+        print('encryption key', _do_transform_loop(publick_key.card, door_loop_size))
 
 
 if __name__ == '__main__':
