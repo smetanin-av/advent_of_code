@@ -1,5 +1,5 @@
 import heapq
-from typing import List, Iterable
+from typing import List, Iterable, Any
 
 TCalories = List[int]
 
@@ -15,35 +15,43 @@ def _split_by_empty_lines(lines: Iterable[str]):
     yield values
 
 
-def _load_data(path: str) -> List[TCalories]:
+def load_data(path: str) -> List[TCalories]:
     with open(path) as fp:
         lines = map(str.strip, fp.readlines())
         return [x for x in _split_by_empty_lines(lines) if x]
 
 
-def part1(path: str):
-    print("solve", path)
-    maximum = 0
-    for calories in _load_data(path):
+def check_answer(actual: Any, expected: Any):
+    assert expected is None or actual == expected, (actual, expected)
+    print("answer is", actual)
+
+
+def solve_part1(path: str, expected: Any):
+    print("solve part1", path)
+    answer = 0
+    for calories in load_data(path):
         total = sum(calories)
-        maximum = max(maximum, total)
-    print(maximum)
+        answer = max(answer, total)
+    check_answer(answer, expected)
 
 
-def part2(path: str):
+def solve_part2(path: str, expected: Any):
     print("solve", path)
     tops = []
-    for calories in _load_data(path):
+    for calories in load_data(path):
         total = sum(calories)
         heapq.heappush(tops, total)
         if len(tops) > 3:
             heapq.heappop(tops)
-    print(sum(tops))
+    check_answer(sum(tops), expected)
 
 
 def main():
-    part2("test.txt")
-    part2("puzzle.txt")
+    solve_part1("test.txt", expected=24000)
+    solve_part1("puzzle.txt", expected=72017)
+
+    solve_part2("test.txt", expected=45000)
+    solve_part2("puzzle.txt", expected=212520)
 
 
 if __name__ == '__main__':
